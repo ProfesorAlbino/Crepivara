@@ -5,11 +5,11 @@ export const REDIS_CLIENT = 'REDIS_CLIENT';
 
 @Module({
   imports: [
-    //PostgresModule,
+    PostgresModule,
   ],
   providers: [
     
   ],
-  exports: []
+  exports: [PostgresModule]
 })
 export class InfrastructureModule {}
