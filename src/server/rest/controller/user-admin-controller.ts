@@ -11,4 +11,10 @@ export class UserAdminController {
   async login(@Body() loginRequestDto: LoginRequestDto): Promise<UserResponseDto> {
     return this.userUseCaseApplication.login(loginRequestDto);
   }
+
+  @Post("/create")
+  async createUser(@Body() user: UserResponseDto): Promise<UserResponseDto> {
+    console.log("Creating user", user);
+    return this.userUseCaseApplication.createUser(user);
+  }
 }

@@ -1,7 +1,4 @@
-import { Optional } from "@nestjs/common";
-
-export class UserResponseDto {
-    @Optional()
+export class UserEntity{
     admin_id: string;
     username: string;
     password: string;

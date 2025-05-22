@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AdminUserTypeORM } from './user/user-schema';
+import { UserRepository } from './user/user-repository';
 
 @Module({
   imports: [
@@ -14,17 +16,17 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         username: configService.get('POSTGRES_USER', 'postgres'),
         password: configService.get('POSTGRES_PASSWORD', 'postgres'),
         database: configService.get('POSTGRES_DB', 'database'),
-        entities: [],
+        entities: [AdminUserTypeORM],
         ssl: {
           rejectUnauthorized: configService.get('POSTGRES_SSLMODE', 'false') === 'true',
           ca: configService.get('POSTGRES_SSL_CERT', ''),
         },
       }),
     }),
-    // Register all entities to be available for DI
-    TypeOrmModule.forFeature([]),
+    // Register the AdminUserTypeORM entity
+    TypeOrmModule.forFeature([AdminUserTypeORM]),
   ],
-  providers: [],
-  exports: [TypeOrmModule],
+  providers: [UserRepository],
+  exports: [TypeOrmModule, UserRepository],
 })
 export class PostgresModule {}
