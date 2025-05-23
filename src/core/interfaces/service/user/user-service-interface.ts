@@ -8,4 +8,5 @@ export abstract class UserServiceAbstract {
   abstract updateUser(user: UserResponseDto): Promise<UserResponseDto>;
   abstract deleteUser(id: string): Promise<any>;
   abstract login(loginRequest: LoginRequestDto): Promise<UserResponseDto>;
+  abstract getAllUsers(): Promise<UserResponseDto[]>;
 }

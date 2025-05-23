@@ -36,4 +36,16 @@ export class UserUseCaseApplication{
 
         return this.userService.updateUser(user);
     }
+
+    async deleteUser(id: string): Promise<UserResponseDto> {
+        return this.userService.deleteUser(id);
+    }
+
+    async getUserById(id: string): Promise<UserResponseDto> {
+        return this.userService.getUserById(id);
+    }
+
+    async getAllUsers(): Promise<UserResponseDto[]> {
+        return this.userService.getAllUsers();
+    }
 }

@@ -64,4 +64,5 @@ export class UserRepository extends UserRepositoryAbstract {
     const result = await this.adminUserRepository.delete({ admin_id: id });
     return typeof result.affected === "number" && result.affected > 0;
   }
+
 }

@@ -9,6 +9,10 @@ export class UserService implements UserServiceAbstract {
 
     constructor(private readonly userRepository: UserRepositoryAbstract) {}
     
+    getAllUsers(): Promise<UserResponseDto[]> {
+        return this.userRepository.findAll();
+    }
+    
     async login(loginRequest: LoginRequestDto): Promise<UserResponseDto> {
         const userResponse = await this.userRepository.findByUsername(loginRequest);
         if (!userResponse) {
@@ -37,8 +41,8 @@ export class UserService implements UserServiceAbstract {
         return updatedUser;
     }
 
-    deleteUser(id: string): Promise<any> {
-        return this.userRepository.delete(id);
+    async deleteUser(id: string): Promise<any> {
+        return await this.userRepository.delete(id);
     }
 
 }
