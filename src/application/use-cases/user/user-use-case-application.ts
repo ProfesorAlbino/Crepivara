@@ -29,4 +29,11 @@ export class UserUseCaseApplication{
 
         return this.userService.createUser(user);
     }
+
+    async updateUser(user: UserResponseDto): Promise<UserResponseDto> {
+        const hashedPassword = await bcrypt.hash(user.password, 10);
+        user.password = hashedPassword;
+
+        return this.userService.updateUser(user);
+    }
 }

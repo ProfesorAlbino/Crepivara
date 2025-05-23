@@ -41,9 +41,11 @@ export class UserRepository extends UserRepositoryAbstract {
     return saved;
   }
 
-  async update(id: string, user: UserEntity): Promise<UserEntity | null> {
-    const existing = await this.adminUserRepository.findOne({ where: { admin_id: id } });
-    if (!existing) return null;
+  async update(user: UserEntity): Promise<UserEntity> {
+    const existing = await this.adminUserRepository.findOne({ where: { admin_id: user.admin_id } });
+    if (!existing) {
+      throw new Error(`User with id ${user.admin_id} not found`);
+    }
 
     // Mezcla los cambios
     const updatedModel = this.adminUserRepository.merge(existing, {

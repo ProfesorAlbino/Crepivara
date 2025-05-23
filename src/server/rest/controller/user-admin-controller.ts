@@ -17,4 +17,10 @@ export class UserAdminController {
     console.log("Creating user", user);
     return this.userUseCaseApplication.createUser(user);
   }
+
+  @Post("/update")
+  async updateUser(@Body() user: UserResponseDto): Promise<UserResponseDto> {
+    console.log("Updating user", user);
+    return this.userUseCaseApplication.updateUser(user);
+  }
 }

@@ -31,9 +31,12 @@ export class UserService implements UserServiceAbstract {
         }
         return user;
     }
-    updateUser(id: string, user: any): Promise<any> {
-        return this.userRepository.update(id, user);
+
+    async updateUser(user: UserResponseDto): Promise<UserResponseDto> {
+        const updatedUser = await this.userRepository.update(user);
+        return updatedUser;
     }
+
     deleteUser(id: string): Promise<any> {
         return this.userRepository.delete(id);
     }
