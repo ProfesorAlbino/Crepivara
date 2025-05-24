@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AdminUserTypeORM } from './user/user-schema';
 import { UserRepository } from './user/user-repository';
+import { CategoryTypeORM } from './categories/categories-schema';
+import { CategoryRepository } from './categories/categories-repository';
 
 @Module({
   imports: [
@@ -16,7 +18,7 @@ import { UserRepository } from './user/user-repository';
         username: configService.get('POSTGRES_USER', 'postgres'),
         password: configService.get('POSTGRES_PASSWORD', 'postgres'),
         database: configService.get('POSTGRES_DB', 'database'),
-        entities: [AdminUserTypeORM],
+        entities: [AdminUserTypeORM, CategoryTypeORM],
         ssl: {
           rejectUnauthorized: configService.get('POSTGRES_SSLMODE', 'false') === 'true',
           ca: configService.get('POSTGRES_SSL_CERT', ''),
@@ -24,9 +26,9 @@ import { UserRepository } from './user/user-repository';
       }),
     }),
     // Register the AdminUserTypeORM entity
-    TypeOrmModule.forFeature([AdminUserTypeORM]),
+    TypeOrmModule.forFeature([AdminUserTypeORM, CategoryTypeORM]),
   ],
-  providers: [UserRepository],
-  exports: [TypeOrmModule, UserRepository],
+  providers: [UserRepository, CategoryRepository],
+  exports: [TypeOrmModule, UserRepository, CategoryRepository],
 })
 export class PostgresModule {}
