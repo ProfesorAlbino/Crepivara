@@ -8,6 +8,10 @@ import { CategoryServiceAbstract } from './interfaces/service/category/category-
 import { CategoryService } from './services/category/category.service';
 import { CategoryRepositoryAbstract } from './interfaces/repository/category/category-repository.interface';
 import { CategoryRepository } from 'src/infrastructure/database/postgres/categories/categories-repository';
+import { IngredientServiceAbstract } from './interfaces/service/ingredient/ingredient-service-interface';
+import { IngredientService } from './services/ingredient/ingredient.service';
+import { IngredientRepositoryAbstract } from './interfaces/repository/ingredient/ingredient-repository.interface';
+import { IngredientRepository } from 'src/infrastructure/database/postgres/ingredient/ingredient-repository';
 
 @Module({
   imports: [InfrastructureModule],
@@ -15,8 +19,10 @@ import { CategoryRepository } from 'src/infrastructure/database/postgres/categor
     { provide: UserServiceAbstract, useClass: UserService },
     { provide: UserRepositoryAbstract, useClass: UserRepository },
     { provide: CategoryServiceAbstract, useClass: CategoryService },
-    { provide: CategoryRepositoryAbstract, useClass: CategoryRepository }
+    { provide: CategoryRepositoryAbstract, useClass: CategoryRepository },
+    { provide: IngredientServiceAbstract, useClass: IngredientService },
+    { provide: IngredientRepositoryAbstract, useClass: IngredientRepository }
   ],
-  exports: [UserServiceAbstract, CategoryServiceAbstract, UserRepositoryAbstract, CategoryRepositoryAbstract],
+  exports: [UserServiceAbstract, CategoryServiceAbstract, UserRepositoryAbstract, CategoryRepositoryAbstract, IngredientServiceAbstract, IngredientRepositoryAbstract],
 })
 export class CoreModule {}

@@ -5,6 +5,8 @@ import { AdminUserTypeORM } from './user/user-schema';
 import { UserRepository } from './user/user-repository';
 import { CategoryTypeORM } from './categories/categories-schema';
 import { CategoryRepository } from './categories/categories-repository';
+import { IngredientTypeORM } from './ingredient/ingredient-schema';
+import { IngredientRepository } from './ingredient/ingredient-repository';
 
 @Module({
   imports: [
@@ -18,7 +20,7 @@ import { CategoryRepository } from './categories/categories-repository';
         username: configService.get('POSTGRES_USER', 'postgres'),
         password: configService.get('POSTGRES_PASSWORD', 'postgres'),
         database: configService.get('POSTGRES_DB', 'database'),
-        entities: [AdminUserTypeORM, CategoryTypeORM],
+        entities: [AdminUserTypeORM, CategoryTypeORM, IngredientTypeORM],
         ssl: {
           rejectUnauthorized: configService.get('POSTGRES_SSLMODE', 'false') === 'true',
           ca: configService.get('POSTGRES_SSL_CERT', ''),
@@ -26,9 +28,9 @@ import { CategoryRepository } from './categories/categories-repository';
       }),
     }),
     // Register the AdminUserTypeORM entity
-    TypeOrmModule.forFeature([AdminUserTypeORM, CategoryTypeORM]),
+    TypeOrmModule.forFeature([AdminUserTypeORM, CategoryTypeORM, IngredientTypeORM]),
   ],
-  providers: [UserRepository, CategoryRepository],
-  exports: [TypeOrmModule, UserRepository, CategoryRepository],
+  providers: [UserRepository, CategoryRepository, IngredientRepository],
+  exports: [TypeOrmModule, UserRepository, CategoryRepository, IngredientRepository],
 })
 export class PostgresModule {}
