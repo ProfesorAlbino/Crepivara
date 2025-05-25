@@ -11,6 +11,7 @@ import {
   } from 'typeorm';
   import { CategoryTypeORM } from '../categories/categories-schema';
   import { ProductImageTypeORM } from './product-image-schema';
+import { ProductIngredientTypeORM } from './product-ingredient-schema';
   
   @Entity('products')
   export class ProductTypeORM {
@@ -45,6 +46,9 @@ import {
     @UpdateDateColumn({ name: 'updated_at', type: 'timestamptz', default: () => 'NOW()' })
     updated_at: Date;
   
-    @OneToMany(() => ProductImageTypeORM, (img) => img.product)
+    @OneToMany(() => ProductImageTypeORM, (img) => img.product, { cascade: true })
     images?: ProductImageTypeORM[];
+  
+    @OneToMany(() => ProductIngredientTypeORM, (pi) => pi.product, { cascade: true })
+    productIngredients?: ProductIngredientTypeORM[];
   }
