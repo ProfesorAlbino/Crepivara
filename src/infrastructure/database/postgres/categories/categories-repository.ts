@@ -19,7 +19,7 @@ export class CategoryRepository extends CategoryRepositoryAbstract{
         return this.categoryRepository.save(newCategory);
     }
     async getCategoryById(categoryId: string): Promise<CategoryEntity> {
-        const category = await this.categoryRepository.findOne({ where: { categoryId: categoryId } });
+        const category = await this.categoryRepository.findOne({ where: { category_id: parseInt(categoryId) } });
         if (!category) {
             throw new Error("Category not found");
         }
@@ -31,7 +31,7 @@ export class CategoryRepository extends CategoryRepositoryAbstract{
         return this.categoryRepository.find();
     }
     async updateCategory(categoryId: string, category: categoryRequestDto): Promise<CategoryEntity> {
-        const existingCategory = await this.categoryRepository.findOne({ where: { categoryId: categoryId } });
+        const existingCategory = await this.categoryRepository.findOne({ where: { category_id: parseInt(categoryId) } });
         if (!existingCategory) {
             throw new Error("Category not found");
         }
@@ -39,7 +39,7 @@ export class CategoryRepository extends CategoryRepositoryAbstract{
         return this.categoryRepository.save(existingCategory);
     }
     async deleteCategory(categoryId: string): Promise<CategoryEntity> {
-        const category = await this.categoryRepository.findOne({ where: { categoryId: categoryId } });
+        const category = await this.categoryRepository.findOne({ where: { category_id: parseInt(categoryId) } });
         if (!category) {
             throw new Error("Category not found");
         }

@@ -20,7 +20,7 @@ export class IngredientRepository extends IngredientRepositoryAbstract{
     }
 
     async findById(id: string): Promise<IngredientEntity> {
-        const ingredient = await this.ingredientRepository.findOne({ where: { ingredient_id: id } });
+        const ingredient = await this.ingredientRepository.findOne({ where: { ingredient_id: parseInt(id) } });
         if (!ingredient) {
             throw new Error("Ingredient not found");
         }
@@ -36,7 +36,7 @@ export class IngredientRepository extends IngredientRepositoryAbstract{
     }
 
     async delete(id: string): Promise<IngredientEntity> {
-        const ingredient = await this.ingredientRepository.findOne({ where: { ingredient_id: id } });
+        const ingredient = await this.ingredientRepository.findOne({ where: { ingredient_id: parseInt(id) } });
 
         if (!ingredient) {
             throw new Error("Ingredient not found");
