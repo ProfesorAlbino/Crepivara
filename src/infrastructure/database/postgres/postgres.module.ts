@@ -18,11 +18,10 @@ import { ProductIngredientTypeORM } from './product/product-ingredient-schema';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get('POSTGRES_HOST', 'localhost'),
-        port: parseInt(configService.get('POSTGRES_PORT', '5432')),
-        username: configService.get('POSTGRES_USER', 'postgres'),
-        password: configService.get('POSTGRES_PASSWORD', 'postgres'),
-        database: configService.get('POSTGRES_DB', 'database'),
+        url: configService.get<string>('POSTGRES_STRING_CONNECTION'),
+        synchronize: configService.get<boolean>('TYPEORM_SYNC', false),
+        logging: configService.get<boolean>('TYPEORM_LOGGING', true),
+        
         entities: [
           AdminUserTypeORM,
           CategoryTypeORM,
@@ -33,7 +32,6 @@ import { ProductIngredientTypeORM } from './product/product-ingredient-schema';
         ],
         ssl: {
           rejectUnauthorized: configService.get('POSTGRES_SSLMODE', 'false') === 'true',
-          ca: configService.get('POSTGRES_SSL_CERT', ''),
         },
       }),
     }),
