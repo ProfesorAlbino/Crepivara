@@ -6,7 +6,7 @@ import { IngredientUseCaseApplication } from './use-cases/ingredient/ingredient-
 import { ProductUseCaseApplication } from './use-cases/product/product-use-case-application';
 @Module({
   imports: [CoreModule],
-  providers: [UserUseCaseApplication, CategoryUseCaseApplication, IngredientUseCaseApplication, ProductUseCaseApplication],
+  providers: [UserUseCaseApplication, CategoryUseCaseApplication, IngredientUseCaseApplication, ProductUseCaseApplication,],
   exports: [UserUseCaseApplication, CategoryUseCaseApplication, IngredientUseCaseApplication, ProductUseCaseApplication],
 })
 export class ApplicationModule {} 

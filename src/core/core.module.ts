@@ -16,6 +16,14 @@ import { ProductService } from './services/products/product.service';
 import { ProductRepository } from 'src/infrastructure/database/postgres/product/product-repository';
 import { ProductServiceAbstract } from './interfaces/service/product/product-service-interface';
 import { ProductRepositoryAbstract } from './interfaces/repository/products/product-repository.interface';
+import { ProductImageService } from './services/products/product-image.service';
+import { ProductImageRepository } from 'src/infrastructure/database/postgres/product/product-image-repository';
+import { ProductImageServiceAbstract } from './interfaces/service/product/product-image-interface';
+import { ProductIngredientService } from './services/products/product-ingredient.service';
+import { ProductIngredientRepository } from 'src/infrastructure/database/postgres/product/product-ingredient-repository';
+import { ProductIngredientServiceAbstract } from './interfaces/service/product/product-ingredient-interface';
+import { ProductIngredientRepositoryAbstract } from './interfaces/repository/products/product-ingredient-repository.interface';
+import { ProductImageRepositoryAbstract } from './interfaces/repository/products/product-image-repository.interface';
 
 @Module({
   imports: [InfrastructureModule],
@@ -28,7 +36,11 @@ import { ProductRepositoryAbstract } from './interfaces/repository/products/prod
     { provide: IngredientRepositoryAbstract, useClass: IngredientRepository },
     { provide: ProductServiceAbstract, useClass: ProductService },
     { provide: ProductRepositoryAbstract, useClass: ProductRepository },
+    { provide: ProductImageServiceAbstract, useClass: ProductImageService },
+    { provide: ProductImageRepositoryAbstract, useClass: ProductImageRepository },
+    { provide: ProductIngredientServiceAbstract, useClass: ProductIngredientService },
+    { provide: ProductIngredientRepositoryAbstract, useClass: ProductIngredientRepository },
   ],
-  exports: [UserServiceAbstract, CategoryServiceAbstract, UserRepositoryAbstract, CategoryRepositoryAbstract, IngredientServiceAbstract, IngredientRepositoryAbstract, ProductServiceAbstract, ProductRepositoryAbstract],
+  exports: [UserServiceAbstract, CategoryServiceAbstract, UserRepositoryAbstract, CategoryRepositoryAbstract, IngredientServiceAbstract, IngredientRepositoryAbstract, ProductServiceAbstract, ProductRepositoryAbstract, ProductImageServiceAbstract, ProductImageRepositoryAbstract, ProductIngredientServiceAbstract, ProductIngredientRepositoryAbstract],
 })
 export class CoreModule {}
